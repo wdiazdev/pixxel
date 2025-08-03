@@ -4,6 +4,8 @@ import React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import Image from "next/image"
+import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs"
+import { Button } from "./ui/button"
 
 export default function Header() {
   const path = usePathname()
@@ -27,6 +29,7 @@ export default function Header() {
             className="min-w-24 object-cover"
             width={96}
             height={24}
+            priority
           />
         </Link>
 
@@ -43,7 +46,27 @@ export default function Header() {
             ))}
           </div>
         )}
-        <div className="flex items-center gap-3 ml-10 md:ml-20">Auth</div>
+        <div className="flex items-center gap-3 ml-10 md:ml-20">
+          <SignedOut>
+            <SignInButton>
+              <Button variant="glass" className="hidden sm:flex">
+                Sign In
+              </Button>
+            </SignInButton>
+            <SignUpButton>
+              <Button variant="primary">Get Started</Button>
+            </SignUpButton>
+          </SignedOut>
+          <SignedIn>
+            <UserButton
+              appearance={{
+                elements: {
+                  avatarBox: "w-20 h-20",
+                },
+              }}
+            />
+          </SignedIn>
+        </div>
       </div>
     </header>
   )

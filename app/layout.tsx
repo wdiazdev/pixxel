@@ -5,6 +5,9 @@ import { Inter } from "next/font/google"
 import { Toaster } from "@/components/ui/sonner"
 import { FloatingShapes } from "@/components/FloatingShapes"
 import Navbar from "@/components/Navbar"
+import { ConvexClientProvider } from "@/app/ConvexClientProvider"
+import { ClerkProvider } from "@clerk/nextjs"
+import { shadesOfPurple } from "@clerk/themes"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -28,10 +31,23 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <FloatingShapes />
-            <Navbar />
-            <Toaster richColors />
-            {children}
+            <ClerkProvider
+              appearance={{
+                baseTheme: [shadesOfPurple],
+                variables: { colorPrimary: "blue" },
+                signIn: {
+                  baseTheme: [shadesOfPurple],
+                  variables: { colorPrimary: "green" },
+                },
+              }}
+            >
+              <ConvexClientProvider>
+                <FloatingShapes />
+                <Navbar />
+                <Toaster richColors />
+                {children}
+              </ConvexClientProvider>
+            </ClerkProvider>
           </ThemeProvider>
         </main>
       </body>
