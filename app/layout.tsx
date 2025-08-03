@@ -33,12 +33,7 @@ export default function RootLayout({
           >
             <ClerkProvider
               appearance={{
-                baseTheme: [shadesOfPurple],
-                variables: { colorPrimary: "blue" },
-                signIn: {
-                  baseTheme: [shadesOfPurple],
-                  variables: { colorPrimary: "green" },
-                },
+                baseTheme: shadesOfPurple,
               }}
             >
               <ConvexClientProvider>

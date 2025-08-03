@@ -1,4 +1,3 @@
-import { use } from "react"
 import { mutation, query } from "./_generated/server"
 
 export const store = mutation({
