@@ -9,11 +9,11 @@ import { Button } from "./ui/button"
 import { useStoreUser } from "@/hook/useStoreUser"
 import { BarLoader } from "react-spinners"
 import { Authenticated, Unauthenticated } from "convex/react"
-import { cn } from "@/lib/utils"
+import { LayoutDashboard, Sparkles } from "lucide-react"
 
 export default function Header() {
   const path = usePathname()
-  const { isLoading, isAuthenticated } = useStoreUser()
+  const { isLoading } = useStoreUser()
 
   if (path.includes("/editor")) {
     return null
@@ -72,14 +72,24 @@ export default function Header() {
                   <Button variant="primary">Get Started</Button>
                 </SignUpButton>
               </Unauthenticated>
+
               <Authenticated>
-                <UserButton
-                  appearance={{
-                    elements: {
-                      avatarBox: "w-20 h-20",
-                    },
-                  }}
-                />
+                <div className="flex items-center gap-2 md:gap-4">
+                  <Link href={"/dashboard"}>
+                    <Button variant="glass">
+                      <LayoutDashboard className="h-4 w-4" />
+                      <span className="hidden md:flex">Dashboard</span>
+                    </Button>
+                  </Link>
+
+                  <UserButton
+                    appearance={{
+                      elements: {
+                        avatarBox: "w-20 h-20",
+                      },
+                    }}
+                  />
+                </div>
               </Authenticated>
             </>
           )}
